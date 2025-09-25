@@ -48,3 +48,12 @@ jobs:
     - name: terraform validate
       working-directory: ./modules/networking
       run: terraform validate
+    - name: terraform plan
+      working-directory: ./modules/networking
+      run: terraform plan -out=tfplan
+
+    - name: terraform apply
+      if: github.ref == 'refs/heads/main'
+      working-directory: ./modules/networking
+      run: terraform apply -auto-approve tfplan   
+
