@@ -6,7 +6,6 @@ on:
     - cron: '0 0 * * *'
 
 
-
 permissions:
   id-token: write
   contents: read        
@@ -40,9 +39,6 @@ jobs:
       working-directory: ./modules/networking
       run: terraform init
 
-    - name: terraform fmt
-      working-directory: ./modules/networking
-      run: terraform fmt
 
     - name: terraform plan Destroy
       working-directory: ./modules/networking
