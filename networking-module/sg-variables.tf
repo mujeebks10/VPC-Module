@@ -1,8 +1,8 @@
 # Common
-variable "ingress" {
-  type    = string
-  default = "ingress"
-}
+# variable "ingress" {
+#   type    = string
+#   default = "ingress"
+# }
 
 variable "ingress_protocol" {
   description = "Protocol for ingress rules"
