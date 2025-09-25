@@ -1,20 +1,3 @@
-terraform {
-  required_version = ">= 1.3.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 6.0"
-    }
-  }
-
-}
-
-# Configure the AWS Provider
-provider "aws" {
-  region  = "us-east-1" # Specify the AWS region
-  profile = "admin"     # Replace with the name of your AWS CLI profile
-}
-
 
 module "three_tier_vpc" {
   source = "./../../networking-module"
