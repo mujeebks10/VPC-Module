@@ -20,5 +20,5 @@ terraform {
 #### Configure the AWS Provider
 provider "aws" {
   region  = "us-east-1" # Specify the AWS region
-  profile = "admin"     # Replace with the name of your AWS CLI profile
+       # Replace with the name of your AWS CLI profile
 }
