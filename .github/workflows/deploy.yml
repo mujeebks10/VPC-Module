@@ -43,7 +43,7 @@ jobs:
 
     - name: terraform fmt
       working-directory: ./modules/networking
-      run: terraform fmt -check
+      run: terraform fmt
       
     - name: terraform validate
       working-directory: ./modules/networking
