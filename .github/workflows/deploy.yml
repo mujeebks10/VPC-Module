@@ -39,7 +39,7 @@ jobs:
         
     
     - name: terraform init
-      working-directory: ./modukles/networking
+      working-directory: ./modules/networking
       run: terraform init
 
     - name: terraform fmt
