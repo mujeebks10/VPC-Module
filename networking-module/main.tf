@@ -55,15 +55,15 @@ resource "aws_internet_gateway" "my_three_tier_igw" {
 }
 
 ########### NAT GATEWAYS ##########
-# resource "aws_nat_gateway" "web_tier" {
-#   for_each      = aws_subnet.web
-#   allocation_id = aws_eip.web_tier[each.key].id
-#   subnet_id     = each.value.id
+resource "aws_nat_gateway" "web_tier" {
+  for_each      = aws_subnet.web
+  allocation_id = aws_eip.web_tier[each.key].id
+  subnet_id     = each.value.id
 
-#   tags = {
-#     Name = each.key == var.web_subnets[0] ? var.aws_nat_web1_GW1 : var.aws_nat_web2_GW2
-#   }
-# }
+  tags = {
+    Name = each.key == var.web_subnets[0] ? var.aws_nat_web1_GW1 : var.aws_nat_web2_GW2
+  }
+}
 
 
 ########## OR NAT ###########
