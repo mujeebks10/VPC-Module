@@ -66,7 +66,6 @@ resource "aws_nat_gateway" "web_tier" {
   }
 }
 
-
 # ########## OR NAT ###########
 
 # resource "aws_nat_gateway" "web_tier1" {
