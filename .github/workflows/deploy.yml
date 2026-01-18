@@ -52,17 +52,17 @@ jobs:
       working-directory: ./modules/networking
       run: terraform plan -out=tfplan
 
-    - name: terraform apply
-      if: github.ref == 'refs/heads/main'
-      working-directory: ./modules/networking
-      run: terraform apply -auto-approve tfplan   
+    # - name: terraform apply
+    #   if: github.ref == 'refs/heads/main'
+    #   working-directory: ./modules/networking
+    #   run: terraform apply -auto-approve tfplan   
 
     
-    # - name: terraform plan Destroy
-    #   working-directory: ./modules/networking
-    #   run: terraform plan -destroy -out=tfplan-destroy
+    - name: terraform plan Destroy
+      working-directory: ./modules/networking
+      run: terraform plan -destroy -out=tfplan-destroy
 
-    # - name: terraform apply Destroy
-    #   working-directory: ./modules/networking
-    #   run: terraform apply -auto-approve tfplan-destroy    
+    - name: terraform apply Destroy
+      working-directory: ./modules/networking
+      run: terraform apply -auto-approve tfplan-destroy    
 # 
