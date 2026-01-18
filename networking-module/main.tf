@@ -55,30 +55,30 @@ resource "aws_internet_gateway" "my_three_tier_igw" {
   }
 }
 
-########### NAT GATEWAYS ##########
-resource "aws_nat_gateway" "web_tier" {
-  for_each      = aws_subnet.web
-  allocation_id = aws_eip.web_tier[each.key].id
-  subnet_id     = each.value.id
+# ########### NAT GATEWAYS ##########
+# resource "aws_nat_gateway" "web_tier" {
+#   for_each      = aws_subnet.web
+#   allocation_id = aws_eip.web_tier[each.key].id
+#   subnet_id     = each.value.id
 
-  tags = {
-    Name = each.key == var.web_subnets[0] ? var.aws_nat_web1_GW1 : var.aws_nat_web2_GW2
-  }
+#   tags = {
+#     Name = each.key == var.web_subnets[0] ? var.aws_nat_web1_GW1 : var.aws_nat_web2_GW2
+#   }
+# }
+
+########## OR NAT ###########
+
+resource "aws_nat_gateway" "web_tier1" {
+  allocation_id = aws_eip.web_tier1_eip1.id
+  subnet_id     = aws_subnet.web[var.web_subnets[0]].id
+  tags          = { Name = var.aws_nat_web1_GW1 }
 }
 
-# ########## OR NAT ###########
-
-# resource "aws_nat_gateway" "web_tier1" {
-#   allocation_id = aws_eip.web_tier1_eip1.id
-#   subnet_id     = aws_subnet.web[var.web_subnets[0]].id
-#   tags          = { Name = var.aws_nat_web1_GW1 }
-# }
-
-# resource "aws_nat_gateway" "web_tier2" {
-#   allocation_id = aws_eip.web_tier2_eip2.id
-#   subnet_id     = aws_subnet.web[var.web_subnets[1]].id
-#   tags          = { Name = var.aws_nat_web2_GW2 }
-# }
+resource "aws_nat_gateway" "web_tier2" {
+  allocation_id = aws_eip.web_tier2_eip2.id
+  subnet_id     = aws_subnet.web[var.web_subnets[1]].id
+  tags          = { Name = var.aws_nat_web2_GW2 }
+}
 
 ########## ROUTE TABLES ##########
 
