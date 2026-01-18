@@ -6,7 +6,7 @@ resource "aws_vpc" "my_three_tier_vpc" {
 }
 
 
-########### SUBNETS ##########
+########### SUBNETS Web Tier ##########
 
 resource "aws_subnet" "web" {
   for_each                = toset(var.web_subnets)
@@ -21,7 +21,7 @@ resource "aws_subnet" "web" {
   }
 }
 
-
+########### SUBNETS APP Tier ##########
 resource "aws_subnet" "app" {
   for_each   = toset(var.app_subnets)
   vpc_id     = aws_vpc.my_three_tier_vpc.id
@@ -35,6 +35,7 @@ resource "aws_subnet" "app" {
 }
 
 
+########### SUBNETS DB Tier ##########
 resource "aws_subnet" "db" {
   for_each          = toset(var.db_subnets)
   vpc_id            = aws_vpc.my_three_tier_vpc.id
@@ -66,19 +67,19 @@ resource "aws_nat_gateway" "web_tier" {
 }
 
 
-########## OR NAT ###########
+# ########## OR NAT ###########
 
-resource "aws_nat_gateway" "web_tier1" {
-  allocation_id = aws_eip.web_tier1_eip1.id
-  subnet_id     = aws_subnet.web[var.web_subnets[0]].id
-  tags          = { Name = var.aws_nat_web1_GW1 }
-}
+# resource "aws_nat_gateway" "web_tier1" {
+#   allocation_id = aws_eip.web_tier1_eip1.id
+#   subnet_id     = aws_subnet.web[var.web_subnets[0]].id
+#   tags          = { Name = var.aws_nat_web1_GW1 }
+# }
 
-resource "aws_nat_gateway" "web_tier2" {
-  allocation_id = aws_eip.web_tier2_eip2.id
-  subnet_id     = aws_subnet.web[var.web_subnets[1]].id
-  tags          = { Name = var.aws_nat_web2_GW2 }
-}
+# resource "aws_nat_gateway" "web_tier2" {
+#   allocation_id = aws_eip.web_tier2_eip2.id
+#   subnet_id     = aws_subnet.web[var.web_subnets[1]].id
+#   tags          = { Name = var.aws_nat_web2_GW2 }
+# }
 
 ########## ROUTE TABLES ##########
 
